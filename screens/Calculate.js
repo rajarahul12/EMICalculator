@@ -24,6 +24,9 @@ const Calculate = (props) => {
   const [nickName, setNickName] = useState('');
 
   const calculateEMI = () => {
+    if (amount === '' || months === '' || interest === '') {
+      return;
+    }
     var monthlyInterestRatio = interest / 100 / 12;
     var topNum = Math.pow(1 + monthlyInterestRatio, months);
     var bottomNum = topNum - 1;
@@ -37,6 +40,7 @@ const Calculate = (props) => {
 
   const handleSave = () => {
     firestore().collection(user?.uid).add({
+      timestamp: firestore.FieldValue.serverTimestamp(),
       nickName: nickName,
       amount: amount,
       interest: interest,
@@ -102,6 +106,16 @@ const Calculate = (props) => {
               style={[styles.button, {width: '60%'}]}
               onPress={handleSave}>
               <Text>Save</Text>
+            </TouchableOpacity>
+            <TouchableOpacity
+              style={[styles.button, {width: '60%'}]}
+              onPress={() =>
+                props.navigation.navigate(
+                  'Home',
+                  (initialParams = {user: user}),
+                )
+              }>
+              <Text>Cancel</Text>
             </TouchableOpacity>
           </View>
         )}

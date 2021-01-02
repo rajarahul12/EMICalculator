@@ -1,18 +1,38 @@
 import React from 'react';
 import {
-  Button,
   Image,
   SafeAreaView,
   StyleSheet,
   Text,
   TouchableOpacity,
   View,
+  FlatList,
 } from 'react-native';
 import {GoogleSignin} from 'react-native-google-signin';
+import firestore from '@react-native-firebase/firestore';
 import auth from '@react-native-firebase/auth';
+import {useEffect} from 'react';
+import {useState} from 'react';
 
 const Home = (props) => {
   const {user} = props.route.params;
+  const [list, setList] = useState([]);
+
+  useEffect(() => {
+    firestore()
+      .collection(user?.uid)
+      .orderBy('timestamp', 'desc')
+      .onSnapshot((snapshot) => {
+        const listData = [];
+        snapshot.forEach((documentSnapshot) => {
+          listData.push({
+            ...documentSnapshot.data(),
+            id: documentSnapshot.id,
+          });
+        });
+        setList(listData);
+      });
+  }, []);
 
   const signOut = async () => {
     try {
@@ -27,19 +47,37 @@ const Home = (props) => {
   };
   return (
     <SafeAreaView style={styles.container}>
-      <View style={styles.user}>
-        <Image
-          style={{height: 40, width: 40}}
-          source={require('../assets/profile.png')}
-        />
-        <Text style={styles.userText}>Hello, {user?.displayName}</Text>
+      <View style={styles.header}>
+        <View style={styles.user}>
+          <Image
+            style={{height: 40, width: 40}}
+            source={require('../assets/profile.png')}
+          />
+          <Text style={styles.userText}>Hello, {user?.displayName}</Text>
+        </View>
+        <TouchableOpacity onPress={signOut}>
+          <Image
+            style={{height: 40, width: 40}}
+            source={require('../assets/log-out.png')}
+          />
+        </TouchableOpacity>
       </View>
-      <TouchableOpacity onPress={signOut}>
-        <Image
-          style={{height: 40, width: 40}}
-          source={require('../assets/log-out.png')}
-        />
-      </TouchableOpacity>
+
+      <FlatList
+        data={list}
+        renderItem={({item}) => (
+          <View
+            style={{
+              height: 50,
+              flexDirection: 'row',
+              alignItems: 'center',
+              justifyContent: 'space-between',
+            }}>
+            <Text>{item.nickName}</Text>
+            <Text>EMI: {item.emiAmount.toFixed(2)}</Text>
+          </View>
+        )}
+      />
 
       <TouchableOpacity
         onPress={() =>
@@ -72,9 +110,11 @@ export default Home;
 const styles = StyleSheet.create({
   container: {
     margin: 30,
+    height: '100%',
+  },
+  header: {
     flexDirection: 'row',
     justifyContent: 'space-between',
-    height: '100%',
   },
   user: {
     height: 50,
