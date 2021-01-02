@@ -11,14 +11,17 @@ import {
 } from 'react-native';
 import CustomTextField from '../components/CustomTextField';
 import ResultCard from '../components/ResultCard';
+import firestore from '@react-native-firebase/firestore';
 
-const Calculate = () => {
+const Calculate = (props) => {
+  const {user} = props.route.params;
   const [amount, setAmount] = useState('');
   const [months, setMonths] = useState('');
   const [interest, setInterest] = useState('');
   const [emiAmount, setEMIAmount] = useState('');
   const [totalAmount, setTotalAmount] = useState('');
   const [totalInterest, setTotalInterest] = useState('');
+  const [nickName, setNickName] = useState('');
 
   const calculateEMI = () => {
     var monthlyInterestRatio = interest / 100 / 12;
@@ -32,7 +35,18 @@ const Calculate = () => {
     setTotalInterest(totalInterest);
   };
 
-  const handleSave = () => {};
+  const handleSave = () => {
+    firestore().collection(user?.uid).add({
+      nickName: nickName,
+      amount: amount,
+      interest: interest,
+      months: months,
+      emiAmount: emiAmount,
+      totalAmount: totalAmount,
+      totalInterest: totalInterest,
+    });
+    props.navigation.navigate('Home', (initialParams = {user: user}));
+  };
 
   return (
     <SafeAreaView style={styles.container}>
@@ -80,9 +94,9 @@ const Calculate = () => {
               color="#5bc0de"
             />
             <CustomTextField
-              value={interest}
-              handleChange={(text) => setInterest(parseFloat(text))}
-              placeholder="Interest Rate"
+              value={nickName}
+              handleChange={(text) => setNickName(text)}
+              placeholder="Nick Name"
             />
             <TouchableOpacity
               style={[styles.button, {width: '60%'}]}

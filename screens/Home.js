@@ -42,7 +42,9 @@ const Home = (props) => {
       </TouchableOpacity>
 
       <TouchableOpacity
-        onPress={() => props.navigation.navigate('Calculate')}
+        onPress={() =>
+          props.navigation.navigate('Calculate', (initialParams = {user: user}))
+        }
         style={{
           borderWidth: 1,
           borderColor: 'rgba(0,0,0,0.2)',
