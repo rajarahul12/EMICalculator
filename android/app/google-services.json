@@ -1,0 +1,54 @@
+{
+  "project_info": {
+    "project_number": "1022129927824",
+    "project_id": "emi-calculator-d033b",
+    "storage_bucket": "emi-calculator-d033b.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1022129927824:android:6e80a9277d3eb560654a15",
+        "android_client_info": {
+          "package_name": "com.emicalculator"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1022129927824-htioanglj80gt12nssd9dudj9na803ek.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.emicalculator",
+            "certificate_hash": "5e8f16062ea3cd2c4a0d547876baa6f38cabf625"
+          }
+        },
+        {
+          "client_id": "1022129927824-6rtjphtf29itrlhbcqrvakouo71dids5.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAxiQON5EPGDQ9RjVXix787ura8aOLCnJI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1022129927824-6rtjphtf29itrlhbcqrvakouo71dids5.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "1022129927824-cp55foftgfb523p62a64ruei7stb1i1m.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "org.reactjs.native.example.EMICalculator"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
