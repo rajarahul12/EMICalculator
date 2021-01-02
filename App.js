@@ -1,14 +1,21 @@
 import React, {useState, useEffect} from 'react';
-import {Button, SafeAreaView} from 'react-native';
-import {
-  GoogleSignin,
-  GoogleSigninButton,
-  statusCodes,
-} from 'react-native-google-signin';
+
+import {GoogleSignin} from 'react-native-google-signin';
 import auth from '@react-native-firebase/auth';
+import {NavigationContainer} from '@react-navigation/native';
+import {createStackNavigator} from '@react-navigation/stack';
+import AnimatedLoader from 'react-native-animated-loader';
+
+import Login from './screens/Login';
+import {StyleSheet, Text} from 'react-native';
+import Home from './screens/Home';
+import Calculate from './screens/Calculate';
+
+const Stack = createStackNavigator();
 
 const App = () => {
   const [user, setUser] = useState(null);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     GoogleSignin.configure({
@@ -20,67 +27,52 @@ const App = () => {
     const subscriber = auth().onAuthStateChanged((user) => {
       if (user) {
         setUser(user);
-        console.log(user);
+        setLoading(false);
       } else {
         setUser(null);
+        setLoading(false);
       }
     });
     return subscriber;
   }, []);
 
-  const signIn = async () => {
-    try {
-      await GoogleSignin.hasPlayServices();
-      const {accessToken, idToken} = await GoogleSignin.signIn();
-
-      const credential = auth.GoogleAuthProvider.credential(
-        idToken,
-        accessToken,
-      );
-      await auth().signInWithCredential(credential);
-    } catch (error) {
-      if (error.code === statusCodes.SIGN_IN_CANCELLED) {
-        // user cancelled the login flow
-        alert('Cancel');
-      } else if (error.code === statusCodes.IN_PROGRESS) {
-        alert('Signin in progress');
-        // operation (f.e. sign in) is in progress already
-      } else if (error.code === statusCodes.PLAY_SERVICES_NOT_AVAILABLE) {
-        alert('PLAY_SERVICES_NOT_AVAILABLE');
-        // play services not available or outdated
-      } else {
-        // some other error happened
-      }
-    }
-  };
-
-  const signOut = async () => {
-    try {
-      await GoogleSignin.revokeAccess();
-      await GoogleSignin.signOut();
-      auth()
-        .signOut()
-        .then(() => alert('Your are signed out!'));
-      setUser(null);
-    } catch (error) {
-      console.error(error);
-    }
-  };
-
-  return (
-    <SafeAreaView>
-      {user ? (
-        <Button onPress={signOut} title="LogOut" color="red"></Button>
-      ) : (
-        <GoogleSigninButton
-          style={{width: 192, height: 48}}
-          size={GoogleSigninButton.Size.Wide}
-          color={GoogleSigninButton.Color.Dark}
-          onPress={signIn}
-        />
-      )}
-    </SafeAreaView>
+  return loading ? (
+    <AnimatedLoader
+      visible={loading}
+      overlayColor="rgba(255,255,255,0.75)"
+      source={require('./assets/loader.json')}
+      animationStyle={styles.lottie}
+      speed={1}
+    />
+  ) : (
+    <NavigationContainer>
+      <Stack.Navigator screenOptions={{headerShown: false}}>
+        {user ? (
+          <>
+            <Stack.Screen
+              name="Home"
+              component={Home}
+              initialParams={{user: user}}
+            />
+            <Stack.Screen
+              name="Calculate"
+              component={Calculate}
+              initialParams={{user: user}}
+            />
+          </>
+        ) : (
+          <Stack.Screen name="Login" component={Login} />
+        )}
+      </Stack.Navigator>
+    </NavigationContainer>
   );
 };
+
+const styles = StyleSheet.create({
+  lottie: {
+    width: 100,
+    height: 100,
+  },
+});
 
 export default App;
