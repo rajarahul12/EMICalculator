@@ -21,6 +21,8 @@
 		B7E631D9259FA6AF00E34803 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = B7E631D8259FA6AF00E34803 /* GoogleService-Info.plist */; };
 		CDA9BA8F43912FC78152840A /* libPods-EMICalculator.a in Frameworks */ = {isa = PBXBuildFile; fileRef = DC20D32E46C45E1BDE02E485 /* libPods-EMICalculator.a */; };
 		CF11D0B64EF309D24E4399AC /* libPods-EMICalculator-EMICalculatorTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8620BC79B0D5531D83388EE6 /* libPods-EMICalculator-EMICalculatorTests.a */; };
+		5712CA1C06244EBDA5210F84 /* Roboto-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 3A1F0742BD094098B6D29B56 /* Roboto-Regular.ttf */; };
+		A2A8DE06698D45FA906296C8 /* Roboto-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 7CF58E533BFD4E36B816BF24 /* Roboto-Bold.ttf */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -69,6 +71,8 @@
 		E63DD6AC2DD413221D4243C3 /* Pods-EMICalculator-EMICalculatorTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EMICalculator-EMICalculatorTests.debug.xcconfig"; path = "Target Support Files/Pods-EMICalculator-EMICalculatorTests/Pods-EMICalculator-EMICalculatorTests.debug.xcconfig"; sourceTree = "<group>"; };
 		ED297162215061F000B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
 		ED2971642150620600B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = Platforms/AppleTVOS.platform/Developer/SDKs/AppleTVOS12.0.sdk/System/Library/Frameworks/JavaScriptCore.framework; sourceTree = DEVELOPER_DIR; };
+		3A1F0742BD094098B6D29B56 /* Roboto-Regular.ttf */ = {isa = PBXFileReference; name = "Roboto-Regular.ttf"; path = "../assets/fonts/Roboto-Regular.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		7CF58E533BFD4E36B816BF24 /* Roboto-Bold.ttf */ = {isa = PBXFileReference; name = "Roboto-Bold.ttf"; path = "../assets/fonts/Roboto-Bold.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -183,6 +187,7 @@
 				83CBBA001A601CBA00E9B192 /* Products */,
 				2D16E6871FA4F8E400B85C8A /* Frameworks */,
 				757957123376CFC25EE05D23 /* Pods */,
+				BC312F5CF42E4B3A8F194061 /* Resources */,
 			);
 			indentWidth = 2;
 			sourceTree = "<group>";
@@ -199,6 +204,16 @@
 			);
 			name = Products;
 			sourceTree = "<group>";
+		};
+		BC312F5CF42E4B3A8F194061 /* Resources */ = {
+			isa = "PBXGroup";
+			children = (
+				3A1F0742BD094098B6D29B56 /* Roboto-Regular.ttf */,
+				7CF58E533BFD4E36B816BF24 /* Roboto-Bold.ttf */,
+			);
+			name = Resources;
+			sourceTree = "<group>";
+			path = "";
 		};
 /* End PBXGroup section */
 
@@ -346,6 +361,8 @@
 				81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */,
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
 				B7E631D9259FA6AF00E34803 /* GoogleService-Info.plist in Resources */,
+				5712CA1C06244EBDA5210F84 /* Roboto-Regular.ttf in Resources */,
+				A2A8DE06698D45FA906296C8 /* Roboto-Bold.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

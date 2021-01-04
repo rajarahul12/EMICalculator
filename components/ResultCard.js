@@ -16,7 +16,7 @@ export default ResultCard;
 
 const styles = StyleSheet.create({
   container: {
-    marginTop: 15,
+    marginTop: 20,
     height: 150,
     width: 200,
     backgroundColor: 'lavender',
