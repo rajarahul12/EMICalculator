@@ -54,6 +54,7 @@ const Login = (props) => {
 
   return (
     <SafeAreaView>
+      <Text style={styles.heading}>EMI CALCULATOR</Text>
       <Text style={styles.loginText}>LOGIN</Text>
 
       <View style={styles.loginImage}>
@@ -75,11 +76,20 @@ const Login = (props) => {
 export default Login;
 
 const styles = StyleSheet.create({
-  loginText: {
+  heading: {
     width: '100%',
     textAlign: 'center',
+    color: '#194868',
+    fontFamily: 'Roboto-Bold',
     marginTop: 50,
     fontSize: 30,
+    fontWeight: '600',
+  },
+  loginText: {
+    fontSize: 20,
+    width: '100%',
+    textAlign: 'center',
+    marginTop: 20,
     fontWeight: '600',
   },
   loginImage: {

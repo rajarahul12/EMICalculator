@@ -6,7 +6,7 @@ const ResultCard = ({heading, amount, color}) => {
     <View style={styles.container}>
       <Text style={styles.header}>{heading}</Text>
       <View style={[styles.textView, {backgroundColor: color}]}>
-        <Text>{amount.toFixed(2)}</Text>
+        <Text>{`${amount.toFixed(2)} $`}</Text>
       </View>
     </View>
   );
